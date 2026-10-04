@@ -1,12 +1,14 @@
 # AstroPI - NCS_Orbit
-Update: Our code achieved flight status and we are awaiting results!
 
-This is the repository containing the scripts made by team NCS Orbit as part of the 2023 AstroPI Challenge. 
-This year the challenge is to make a program that will calculate the velocity of the ISS.
+Team NCS Orbit's entry for the European Space Agency's Astro Pi Mission Space Lab challenge, developed between November 2023 and February 2024. Our program ran aboard the International Space Station in 2024, where it captured images with the onboard camera, read the GPS coordinates and timestamps from the image metadata, and used the haversine formula to calculate the station's orbital speed.
 
-This repository contains two main components: the submitted code for the competition named 'main.py' and the resources and past iterations of the code along with an exemplar script using image matching in the folder 'astropi-iss-speed-en-resources'
+**Result: the program measured the ISS's orbital speed as 7.75 km/s against an actual speed of 7.66 km/s — a percentage error of roughly 1.2%.**
 
-Our code uses is designed to capture images using a Raspberry Pi Camera, extract GPS coordinates and timestamps from the images, calculate the speed of the ISS (since the camera is on the ISS), and log the average speed to a text file. Here's a detailed explanation of the code:
+This repository contains two main components: the submitted code for the competition, `main.py`, and the resources and past iterations of the code, along with an exemplar script using image matching, in the folder `astropi-iss-speed-en-resources`.
+
+## How the code works
+
+The code is designed to capture images using a Raspberry Pi camera, extract GPS coordinates and timestamps from the images, calculate the speed of the ISS (since the camera is on the ISS), and log the average speed to a text file. Here's a detailed explanation:
 
 ### Imports
 
@@ -37,7 +39,7 @@ Our code uses is designed to capture images using a Raspberry Pi Camera, extract
    - Returns latitude, longitude, and timestamp if available, otherwise `None`.
 
 3. **`haversine_distance(lat1, lon1, lat2, lon2)`**:
-   - Calculates the Haversine distance between two sets of latitude and longitude coordinates.
+   - Calculates the haversine distance between two sets of latitude and longitude coordinates.
    - Parameters:
      - `lat1, lon1`: Latitude and longitude of the first point.
      - `lat2, lon2`: Latitude and longitude of the second point.
@@ -73,7 +75,7 @@ Our code uses is designed to capture images using a Raspberry Pi Camera, extract
 ### Usage
 
 1. **Capturing Images**:
-   - The `capture_images` function initializes the camera, captures images at specified intervals, and stores them in the specified directory.
+   - The `capture_images` function initialises the camera, captures images at specified intervals, and stores them in the specified directory.
 
 2. **Extracting Data**:
    - The `extract_coordinates_and_timestamp` function reads each image's EXIF data to get GPS coordinates and the timestamp.
@@ -86,5 +88,4 @@ Our code uses is designed to capture images using a Raspberry Pi Camera, extract
    - The `log_average_speed_to_txt` function writes the calculated average speed to a text file.
 
 5. **Maintaining Image Count**:
-   - The script ensures that no more than 42 images are stored by deleting the oldest ones if necessary. This is to make sure that the limit of 250mb is satisfied.
-
+   - The script ensures that no more than 42 images are stored by deleting the oldest ones if necessary, to stay within the 250 MB storage limit.
